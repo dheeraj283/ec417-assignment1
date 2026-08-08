@@ -1,0 +1,12 @@
+Correlation with target (|r|, descending):
+MedInc        0.688075
+AveRooms      0.151948
+Latitude      0.144160
+HouseAge      0.105623
+AveBedrms     0.046701
+Longitude     0.045967
+Population    0.024650
+AveOccup      0.023737
+
+Strongest predictor-predictor correlation (excluding target): Latitude vs Longitude = 0.9247
+This matters because strongly correlated predictors (multicollinearity) make individual regression coefficients unstable and hard to interpret (the model can trade weight between the two correlated features without changing predictions much), even though it may not hurt raw predictive accuracy much.

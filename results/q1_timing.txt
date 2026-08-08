@@ -1,0 +1,13 @@
+Q1(c) Distance matrix implementations: correctness and timing
+=================================================================
+loop vs broadcast allclose (atol=1e-10): True
+loop vs expansion max abs diff: 1.192e-07
+loop vs expansion allclose (atol=1e-10): False
+loop vs expansion allclose (atol=1e-6):  True
+
+N=2000, d=20
+
+Method                      Time (s)      Peak mem (MB)   Speedup vs loop 
+Loop (scaled from N=300)    24.9131       small           1.0x (ref)      
+Broadcasting                0.642085      640.0           38.8            
+Expansion trick             0.060407      32.0            412.4           

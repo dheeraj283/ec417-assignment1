@@ -1,0 +1,5 @@
+Problem 3(c): average Bias^2 and Variance over the grid
+M    Bias^2      Var         
+1    0.20543     0.05086     
+3    0.00589     0.05752     
+9    3686.19238  589754.69870

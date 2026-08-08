@@ -1,0 +1,13 @@
+Feature     TestMean(i) train-only    TestMean(ii) full-data    Diff        
+MedInc      -0.02648                  -0.02123                  -0.00525    
+HouseAge    0.01238                   0.00992                   0.00246     
+AveRooms    -0.01306                  -0.01008                  -0.00298    
+AveBedrms   -0.00011                  -0.00008                  -0.00003    
+Population  -0.00429                  -0.00345                  -0.00084    
+AveOccup    -0.01136                  -0.01013                  -0.00123    
+Latitude    -0.02642                  -0.02114                  -0.00528    
+Longitude   0.03138                   0.02513                   0.00625     
+
+Method (i) -- fitting the scaler on the training split only -- is the only correct procedure because the test set must remain completely unseen during preprocessing, exactly as it would be unseen at deployment time. Method (ii) leaks information from the test set (its values contribute to the mean/std used to scale it), which can make validation performance look better than true generalization performance. Here the difference is small because the dataset is large (n=20,640) and randomly split, so train and full-data statistics are numerically close.
+
+A realistic situation where the difference would NOT be small: a much smaller dataset, a non-random or time-based split (e.g. training on earlier years and testing on later years, where the distribution shifts over time), or a split with severe class/group imbalance (e.g. splitting by geographic region so train and test come from different underlying populations). In any of these cases the train-only statistics can differ substantially from the full-data statistics, and using the full-data statistics would leak a meaningfully biased signal into the test evaluation.

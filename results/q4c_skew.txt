@@ -1,0 +1,25 @@
+Skewness of each predictor (descending):
+AveOccup      97.639561
+AveBedrms     31.316956
+AveRooms      20.697869
+Population     4.935858
+MedInc         1.646657
+Latitude       0.465953
+HouseAge       0.060331
+Longitude     -0.297801
+
+Max value of each predictor:
+MedInc           15.000100
+HouseAge         52.000000
+AveRooms        141.909091
+AveBedrms        34.066667
+Population    35682.000000
+AveOccup       1243.333333
+Latitude         41.950000
+Longitude      -114.310000
+
+Candidates for implausible extreme values (inspect these against the histograms in figures/q4c_predictor_histograms.png):
+  - AveRooms / AveBedrms: max values far exceed any plausible average rooms-per-household for a census block (likely a block with very few households, making the average highly sensitive to outliers / data errors).
+  - AveOccup: max value is implausibly large for average household occupancy (likely the same small-denominator issue, or group-quarters populations such as institutions).
+  - Population: some blocks show very large or very small populations relative to the typical block group size.
+Proposed treatment: do not simply delete these rows. Instead, (i) cap/winsorize at a high percentile (e.g. 99th) to limit leverage, since removal discards real (if unusual) block groups and can bias the remaining sample; (ii) inspect the denominator (households) for these rows -- if households is very small, the ratio features are numerically unstable and a robust transform (e.g. log) or a minimum-household filter is more principled than outright deletion.
