@@ -2,6 +2,9 @@ import time
 import numpy as np
 
 def loop_distances(X):
+    """Pairwise Euclidean distances via nested loops.
+    X: (N, d) array. Returns D: (N, N) array with D[i, j] = ||x_i - x_j||.
+    """
     N = X.shape[0]
     D = np.zeros((N, N))
     for i in range(N):
@@ -11,15 +14,22 @@ def loop_distances(X):
     return D
 
 def broadcast_distances(X):
-    diff = X[:, None, :] - X[None, :, :]     
-    D = np.sqrt(np.sum(diff * diff, axis=-1))  
+    """Pairwise Euclidean distances via NumPy broadcasting, no loops.
+    X: (N, d) array. Returns D: (N, N) array with D[i, j] = ||x_i - x_j||.
+    """
+    diff = X[:, None, :] - X[None, :, :]
+    D = np.sqrt(np.sum(diff * diff, axis=-1))
     return D
 
 def expansion_distances(X):
-    sq_norms = np.sum(X * X, axis=1)                    
-    gram = X @ X.T                                       
+    """Pairwise Euclidean distances via ||xi||^2 + ||xj||^2 - 2 xi.xj.
+    X: (N, d) array. Returns D: (N, N) array with D[i, j] = ||x_i - x_j||.
+    Clips small negative values before sqrt (roundoff cancellation).
+    """
+    sq_norms = np.sum(X * X, axis=1)
+    gram = X @ X.T
     sq_dists = sq_norms[:, None] + sq_norms[None, :] - 2 * gram
-    sq_dists = np.maximum(0.0, sq_dists)                 
+    sq_dists = np.maximum(0.0, sq_dists)
     D = np.sqrt(sq_dists)
     return D
 
