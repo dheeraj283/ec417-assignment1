@@ -4,9 +4,6 @@
 **Roll No.:** 623192
 **Course:** EC-417 Introduction to Machine Intelligence, NIT Andhra Pradesh
 
-> This README, `run_all.py`, `requirements.txt`, and
-> `.gitignore` were prepared with the help of Claude (Anthropic). The git history, the report, and all written analysis in this repository are my own.
-
 
 ## Python version
 
@@ -79,14 +76,16 @@ helped diagnose a numerical-stability issue in the degree-9 polynomial
 fit (Problem 3/6).
 
 Everything else — git repository setup and commit history, environment
-setup, running and verifying the code, the written interpretation and
+setup, running and verifying the code was done independently.
+The written interpretation and
 analysis in the report (Sections 1(c) discussion, 2(c)–(f), 3(d), 3(g),
 4(b)–(f), 5(a)–(c), 6(c)), and the one-page summary for Problem 5(c) —
-was done independently. Understanding of the code and the analysis was
+ was done partially with help of ai for formatting and structural integrity.
+ Understanding of the code and the analysis was
 verified before submission.
 
 ## Report
 
-The full written report (`report/EC417_A1_Report.pdf`) contains the
+The full written report (`Report.pdf`) contains the
 figures above together with the discussion/interpretation required by
 each part of the assignment (2c–2f, 3d, 3g, 4b–4f, 5c, 6c).
